@@ -15,8 +15,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.coffeeTextField.delegate = self;
+    self.waterTextField.delegate = self;
+    self.ratioTextField.delegate = self;
 }
 
 
+- (IBAction)calculatePressed:(id)sender {
+
+    float water = [[self.waterTextField text] floatValue];
+    float ratio = [[self.ratioTextField text] floatValue];
+    
+    float coffee = water / ratio;
+    
+    NSString *coffeeText = [NSString stringWithFormat: @"%f", coffee];
+    
+    self.coffeeTextField.text = coffeeText;
+     
+    _ratioTextField.resignFirstResponder;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    return YES;
+}
 @end
